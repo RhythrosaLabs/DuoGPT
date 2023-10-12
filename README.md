@@ -34,11 +34,9 @@ pip install openai
 
 ## Setup
 
-1. Clone this repository:
-```bash
-git clone [URL of your GitHub repo]
-```
-2. Navigate to the directory:
+1. Clone this repository
+   
+3. Navigate to the directory:
 ```bash
 cd DuoGPT
 ```
