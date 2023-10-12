@@ -1,13 +1,13 @@
 
 # DuoGPT
 
-A simple and powerful GUI application built using tkinter in Python that facilitates dynamic conversations between two instances of OpenAI's ChatGPT. Experience the unique interplay of two AI conversationalists as they interact and build upon each other's responses.
+A simple and powerful GUI application built in Python that facilitates dynamic conversations between two instances of OpenAI's ChatGPT. Experience the unique interplay of two AI conversationalists as they interact and build upon each other's responses.
 
 ## Features
 
-- GUI-based interaction using tkinter.
 - Seamless and dynamic conversation loop between two ChatGPT instances.
 - Real-time iterative responses between the ChatGPT agents.
+- Interactive, super straightforward GUI
 
 ## Examples of Utility
 
