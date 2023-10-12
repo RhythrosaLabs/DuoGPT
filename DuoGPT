@@ -8,7 +8,7 @@ import openai
 API_URL = "https://api.openai.com/v1/chat/completions"
 
 HEADERS = {
-    "Authorization": "Bearer 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",
+    "Authorization": "Bearer YOUR PROMPT HERE",
     "Content-Type": "application/json"
 }
 
