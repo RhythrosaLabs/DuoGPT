@@ -22,6 +22,7 @@ Having two ChatGPT instances communicate can be transformative:
 
 ## Prerequisites
 
+- OpenAI API key (attain one here: https://openai.com)
 - Python 3.x
 - tkinter
 - requests
@@ -29,7 +30,7 @@ Having two ChatGPT instances communicate can be transformative:
 ```bash
 pip install openai
 ```
--OpenAI API key (attain one here: https://openai.com)
+
 
 ## Setup
 
