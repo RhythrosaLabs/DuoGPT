@@ -1,0 +1,100 @@
+import tkinter as tk
+from tkinter import scrolledtext
+import requests
+import json
+import openai
+
+# OpenAI setup
+API_URL = "https://api.openai.com/v1/chat/completions"
+
+HEADERS = {
+    "Authorization": "Bearer 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",
+    "Content-Type": "application/json"
+}
+
+class ChatGPTConvoApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("ChatGPT Convo with Function Calls")
+
+        self.start_button = tk.Button(root, text="Start", command=self.start_convo)
+        self.stop_button = tk.Button(root, text="Stop", state=tk.DISABLED, command=self.stop_convo)
+        self.convo_box = scrolledtext.ScrolledText(root, width=70, height=20)
+
+        self.start_button.grid(row=3, column=0, sticky='w')
+        self.stop_button.grid(row=3, column=1, sticky='w')
+        self.convo_box.grid(row=1, column=0, columnspan=2, pady=10)
+
+        self.running = False
+        self.messages = [{"role": "system", "content": "You are a helpful assistant."}]
+
+        self.prompt_label = tk.Label(root, text="Initial Prompt:")
+        self.prompt_entry = tk.Entry(root, width=50)
+
+        self.prompt_label.grid(row=0, column=0, sticky='w')
+        self.prompt_entry.grid(row=0, column=1, columnspan=2, sticky='w', padx=5)
+
+
+    def start_convo(self):
+        self.start_button['state'] = tk.DISABLED
+        self.stop_button['state'] = tk.NORMAL
+        self.running = True
+        self.convo_loop()
+
+    def stop_convo(self):
+        self.running = False
+        self.start_button['state'] = tk.NORMAL
+        self.stop_button['state'] = tk.DISABLED
+
+    def convo_loop(self):
+        if not self.running:
+            return
+
+    # User's initial input is taken as the starting point
+        if len(self.messages) == 1:
+            prompt = self.prompt_entry.get()
+            user_message = {"role": "user", "content": prompt}
+            self.messages.append(user_message)
+        else:
+        # Use the last response from ChatBot2 as the prompt for ChatBot1
+            prompt = self.messages[-1]["content"]
+
+    # ChatBot1's response
+        agent_response = self.run_conversation(prompt, role="assistant")
+    # Always ask if it should continue
+        agent_response += " Would you like me to continue in this direction?"
+        self.messages.append({"role": "assistant", "content": agent_response})
+        self.convo_box.insert(tk.END, f"ChatBot1 (Agent): {agent_response}\n")
+
+    # ChatBot2's response to ChatBot1's query
+        user_sim_response = self.run_conversation(agent_response, role="user")
+        self.messages.append({"role": "user", "content": user_sim_response})
+        self.convo_box.insert(tk.END, f"ChatBot2 (User Sim): {user_sim_response}\n")
+
+        self.root.after(1000, self.convo_loop)
+
+    def truncate_messages(self):
+        """Keeps the last N messages in the self.messages list."""
+        max_messages = 10  # You can adjust this value as needed
+        if len(self.messages) > max_messages:
+            self.messages = self.messages[-max_messages:]
+
+    def run_conversation(self, prompt, role="user"):
+        self.truncate_messages()  # Truncate messages before appending a new one
+        self.messages.append({"role": role, "content": prompt})
+
+        response = requests.post(API_URL, headers=HEADERS, json={"model": "gpt-3.5-turbo", "messages": self.messages}).json()
+
+        if "choices" not in response:
+            error_message = response.get("error", {}).get("message", "Unknown error")
+            print(f"Error from OpenAI API: {error_message}")
+            return f"Error: {error_message}"
+
+        return response["choices"][0]["message"]["content"]
+
+
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ChatGPTConvoApp(root)
+    root.mainloop()
