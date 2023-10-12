@@ -23,9 +23,11 @@ Having two ChatGPT instances communicate can be transformative:
 ## Prerequisites
 
 - Python 3.x
-- requests library:
+- tkinter
+- requests
+- openai library:
 ```bash
-pip install requests
+pip install openai
 ```
 
 ## Setup
@@ -38,7 +40,7 @@ git clone [URL of your GitHub repo]
 ```bash
 cd DuoGPT
 ```
-3. Set up your OpenAI API key. Replace `YOUR_OPENAI_API_KEY` in the `duogpt_app.py` (or the relevant filename) with your actual key.
+3. Set up your OpenAI API key. Replace `YOUR_OPENAI_API_KEY` in the `duogpt_app.py` with your actual key.
 
 > :warning: **Warning:** Never share API keys publicly. Use environment variables or external configurations for secrets.
 
