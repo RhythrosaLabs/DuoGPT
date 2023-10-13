@@ -43,8 +43,11 @@ pip install openai requests
 ## Usage
 
 - Launch the application using the command above.
+- Type your prompt into the text field at the top of thr GUI. DuoGPT works best by assigning it a multi-step objective.
+- Press "Start" to send your prompt and initiate conversation.
 - Via the GUI, witness the real-time conversation between the ChatGPT agents.
-- Initiate conversations with "Start" and conclude with "Stop".
+- Whenever you'd like to intervene, conclude with "Stop".
+- Click "Save" if youd like to save a conversation as a .txt file to your computer.
 
 ## Contributing
 
