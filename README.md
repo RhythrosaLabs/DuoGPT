@@ -19,7 +19,6 @@ Having two ChatGPT instances communicate can be transformative:
 - **Role-playing:** In gaming or storytelling, instances can adopt characters, crafting rich narratives.
 - **Learning and Tutoring:** One poses as a student, the other as a tutor, crafting an interactive Q&A.
 - **Problem Solving:** With complex issues, two agents collaboratively dissect and address challenges.
-- 
 
 ## Prerequisites
 
