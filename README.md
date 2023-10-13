@@ -1,7 +1,7 @@
 
 # DuoGPT
 
-A simple and powerful GUI application built in Python that facilitates dynamic conversations between two instances of OpenAI's ChatGPT. Experience the unique interplay of two AI conversationalists as they interact and build upon each other's responses.
+Initiate seamless and dynamic conversations between two ChatGPT instances! DuoGPT is a simple yet powerful GUI application built in Python that facilitates dynamic conversations between two instances of OpenAI's ChatGPT. Experience the unique interplay of two AI conversationalists as they interact and build upon each other's responses.
 
 ## Features
 
