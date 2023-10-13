@@ -19,6 +19,7 @@ Having two ChatGPT instances communicate can be transformative:
 - **Role-playing:** In gaming or storytelling, instances can adopt characters, crafting rich narratives.
 - **Learning and Tutoring:** One poses as a student, the other as a tutor, crafting an interactive Q&A.
 - **Problem Solving:** With complex issues, two agents collaboratively dissect and address challenges.
+- 
 
 ## Prerequisites
 
@@ -28,26 +29,17 @@ Having two ChatGPT instances communicate can be transformative:
 - requests
 - openai library:
 ```bash
-pip install openai
+pip install openai requests
 ```
 
 
 ## Setup
 
-1. Clone this repository
-   
-3. Navigate to the directory:
-```bash
-cd DuoGPT
-```
-3. Set up your OpenAI API key. Replace `YOUR_OPENAI_API_KEY` in the `duogpt.py` with your actual key.
+1. Download or clone this repository
+2. Open DuoGPT.py
+3. Set up your OpenAI API key. Replace `YOUR_OPENAI_API_KEY` in the DuoGPT.py with your actual key.
+4. Run the application
 
-> :warning: **Warning:** Never share API keys publicly. Use environment variables or external configurations for secrets.
-
-4. Run the application:
-```bash
-python duogpt_app.py
-```
 
 ## Usage
 
