@@ -3,6 +3,10 @@ from tkinter import simpledialog, scrolledtext, messagebox, filedialog, ttk
 import requests
 import json
 import threading
+import re
+import zipfile
+import os
+from io import BytesIO
 
 # OpenAI setup
 CHAT_API_URL = "https://api.openai.com/v1/chat/completions"
@@ -29,12 +33,12 @@ TEAMS = {
     "Development": {
         "Software Development": {
             "bot1": {"model": "gpt-3.5-turbo", "preset": "You are a software developer. Provide solutions and suggestions for software development."},
-            "bot2": {"model": "gpt-3.5-turbo", "preset": "Continue."},
+            "bot2": {"model": "gpt-3.5-turbo", "preset": "Continue writing the codes how you see best fit."},
             "bot3": {"model": "gpt-4", "preset": "You are an expert analyst. Organize and structure the conversation, including all code snippets. Combine partial snippets into complete code blocks if applicable."}
         },
         "Python Development": {
             "bot1": {"model": "gpt-3.5-turbo", "preset": "You are a Python developer. Provide Python code examples and solutions."},
-            "bot2": {"model": "gpt-3.5-turbo", "preset": "Continue."},
+            "bot2": {"model": "gpt-3.5-turbo", "preset": "Continue development."},
             "bot3": {"model": "gpt-4", "preset": "You are an expert analyst. Organize and structure the conversation, including all code snippets. Combine partial snippets into complete code blocks if applicable."}
         }
     },
@@ -167,7 +171,6 @@ class ChatGPTConvoApp:
         self.max_exchanges = 0
 
         # Center column - Regular Chat with model selection
-        self.center_chat_label = ttk.Label(self.center_frame, text="Regular Chat:")
         self.center_chat_box = scrolledtext.ScrolledText(self.center_frame, width=50, height=35)
         self.center_chat_entry = ttk.Entry(self.center_frame, width=50)
         self.center_chat_button = ttk.Button(self.center_frame, text="Send", command=self.send_center_chat)
@@ -176,7 +179,7 @@ class ChatGPTConvoApp:
         self.model_var = tk.StringVar(value="gpt-3.5-turbo")
         self.model_dropdown = ttk.OptionMenu(self.center_frame, self.model_var, "gpt-3.5-turbo", "gpt-3.5-turbo", "gpt-4-turbo")
 
-        self.center_chat_label.grid(row=0, column=0, sticky='w', padx=5, pady=2)
+   
         self.model_label.grid(row=1, column=0, sticky='w', padx=5, pady=2)
         self.model_dropdown.grid(row=1, column=1, sticky='w', padx=5, pady=2)
         self.center_chat_box.grid(row=2, column=0, columnspan=2, padx=5, pady=5)
@@ -284,14 +287,17 @@ class ChatGPTConvoApp:
         thread.start()
 
     def _organize_convo_thread(self):
-        organized_text = self.get_organized_text()
+        organized_text, code_snippets = self.get_organized_text()
+
+        if code_snippets:
+            self.create_code_zip(code_snippets)
 
         # Allow organized text to be downloaded
         self.download_organized_convo(organized_text)
 
     def get_organized_text(self):
         full_convo = self.convo_box.get("1.0", tk.END)
-        prompt = f"Organize and structure the following conversation into a cohesive and detailed plan:\n{full_convo}"
+        prompt = f"Organize and structure the following conversation into a cohesive and detailed plan. If there are code snippets, identify and save each as a separate file:\n{full_convo}"
         category, team_name = self.team_var.get().split("/")
         team = TEAMS[category][team_name]
         model = team["bot3"]["model"]
@@ -309,14 +315,50 @@ class ChatGPTConvoApp:
             if "choices" not in response_data:
                 error_message = response_data.get("error", {}).get("message", "Unknown error")
                 print(f"Error from OpenAI API: {error_message}")
-                return f"Error: {error_message}"
+                return f"Error: {error_message}", []
 
             organized_text = response_data["choices"][0]["message"]["content"]
-            return organized_text
+            
+            # Extract code snippets using regex
+            code_snippets = re.findall(r'```(.*?)```', organized_text, re.DOTALL)
+            
+            return organized_text, code_snippets
 
         except requests.RequestException as e:
             print(f"Request error: {e}")
-            return f"Error: Unable to communicate with the OpenAI API."
+            return f"Error: Unable to communicate with the OpenAI API.", []
+
+    def create_code_zip(self, code_snippets):
+        zip_buffer = BytesIO()
+        with zipfile.ZipFile(zip_buffer, 'a', zipfile.ZIP_DEFLATED) as zip_file:
+            for i, snippet in enumerate(code_snippets, 1):
+                # Infer the file extension if possible
+                language_match = re.match(r'^(\w+)', snippet)
+                if language_match:
+                    language = language_match.group(1)
+                    if language.lower() in ['python', 'py']:
+                        ext = 'py'
+                    elif language.lower() in ['javascript', 'js']:
+                        ext = 'js'
+                    elif language.lower() in ['html']:
+                        ext = 'html'
+                    elif language.lower() in ['css']:
+                        ext = 'css'
+                    else:
+                        ext = 'txt'
+                else:
+                    ext = 'txt'
+                
+                file_name = f"code_snippet_{i}.{ext}"
+                code_content = re.sub(r'^(\w+)', '', snippet, count=1).strip()  # Remove language specifier if present
+                zip_file.writestr(file_name, code_content)
+
+        zip_buffer.seek(0)
+        file_path = filedialog.asksaveasfilename(defaultextension=".zip",
+                                                 filetypes=[("Zip files", "*.zip"), ("All files", "*.*")])
+        if file_path:
+            with open(file_path, 'wb') as f:
+                f.write(zip_buffer.read())
 
     def download_organized_convo(self, organized_text):
         file_path = filedialog.asksaveasfilename(defaultextension=".txt",
