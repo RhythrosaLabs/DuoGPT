@@ -11,7 +11,6 @@ A minimalistic ChatGPT conversation application with integrated team roles, deve
 - [License](#license)
 
 ## Features
-- Simple three-column UI for interactive conversations with ChatGPT bots.
 - Support for multiple bots with predefined roles including strategist, content creator, reviewer, and project manager for various scenarios like marketing, software development, etc.
 - Image generation capabilities (commented out).
 - Real-time chat interjections and conversation organization features.
