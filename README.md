@@ -1,123 +1,82 @@
 # DuoGPT
 
-DuoGPT is a Python-based desktop application that facilitates conversations between pairs of GPT-3.5-turbo bots with complementary roles. The application allows users to select from predefined teams of bots, each designed to work together on specific tasks such as planning social media campaigns, providing tech support, and more. Users can interject and steer the conversation as needed and set an autostop mode to limit the number of message exchanges.
+A minimalistic ChatGPT conversation application with integrated team roles, developed in Python utilizing the OpenAI API.
+
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Key Configuration](#api-key-configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
-
-- **Team Selection**: Choose from predefined teams of bots with complementary roles and preset prompts.
-- **User Interjection**: Interject and steer the conversation at any point.
-- **Autostop Mode**: Set a limit on the number of messages exchanged between the bots.
-- **Save Conversations**: Save the conversation history to a text file.
-- **Custom API Key**: Input your OpenAI API key securely at the start.
+- Simple three-column UI for interactive conversations with ChatGPT bots.
+- Support for multiple bots with predefined roles including strategist, content creator, reviewer, and project manager for various scenarios like marketing, software development, etc.
+- Image generation capabilities (commented out).
+- Real-time chat interjections and conversation organization features.
+- Multi-threaded design for non-blocking UI interaction.
+- Save organized conversations and sessions.
 
 ## Installation
+
+To use this app, you need Python installed on your machine. Python 3.6 or higher is recommended.
 
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/yourusername/DuoGPT.git
-    cd DuoGPT
+    git clone https://github.com/your-username/chatgpt-convo-app.git
+    cd chatgpt-convo-app
     ```
 
-2. Install the required dependencies:
+2. (Recommended) Create and activate a virtual environment:
 
     ```sh
-    pip install requests tkinter
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
+
+3. Install the required dependencies:
+
+    ```sh
+    pip install -r requirements.txt
     ```
 
 ## Usage
 
-1. Run the application:
+Run the application script with Python:
 
-    ```sh
-    python DuoGPT.py
+```sh
+python chatgpt_convo_app.py
+```
+
+When the application is first launched, you will be prompted to enter your OpenAI API key. This is necessary for the app to communicate with the OpenAI API and retrieve responses from ChatGPT bots.
+
+## API Key Configuration
+
+The app requires an API key to interact with OpenAI's API. An API key can be obtained from OpenAI's platform.
+
+- Save your API key in a file called `api_key.json` at the root of the project directory.
+
+    ```json
+    {
+        "api_key": "your-api-key"
+    }
     ```
 
-2. When prompted, enter your OpenAI API key.
-
-3. Select a team from the dropdown menu.
-
-4. Enter an initial user prompt to start the conversation.
-
-5. Optionally, specify the number of message exchanges for autostop mode.
-
-6. Click "Start" to begin the conversation between the bots.
-
-7. Use the "Interject" button to steer the conversation at any point.
-
-8. Click "Stop" to end the conversation manually.
-
-9. Save the conversation using the "Save Convo" button.
-
-## Teams
-
-### Social Media Campaign
-
-- **Bot 1**: Social Media Strategist
-  - Preset: "You are a social media strategist. Plan a social media campaign."
-- **Bot 2**: Content Creator
-  - Preset: "You are a content creator. Create engaging content for the campaign. When asked to continue, provide detailed content ideas."
-
-### Tech Support
-
-- **Bot 1**: Tech Support Specialist
-  - Preset: "You are a tech support specialist. Identify and troubleshoot issues."
-- **Bot 2**: Solutions Architect
-  - Preset: "You are a solutions architect. Provide solutions to tech issues. When asked to continue, provide detailed solutions."
-
-### Creative Writing
-
-- **Bot 1**: Creative Writer
-  - Preset: "You are a creative writer. Develop a plot for a short story."
-- **Bot 2**: Editor
-  - Preset: "You are an editor. Edit and enhance the story. When asked to continue, provide editing suggestions."
-
-### Financial Planning
-
-- **Bot 1**: Financial Planner
-  - Preset: "You are a financial planner. Create a financial plan."
-- **Bot 2**: Investment Advisor
-  - Preset: "You are an investment advisor. Suggest investment options. When asked to continue, provide detailed investment advice."
-
-### Customer Support
-
-- **Bot 1**: Customer Service Representative
-  - Preset: "You are a customer service representative. Greet the customer and gather information about their issue."
-- **Bot 2**: Problem Solver
-  - Preset: "You are a problem solver. Provide solutions to the customer's issue. When asked to continue, offer additional troubleshooting steps or escalate the issue."
-
-### Marketing Strategy
-
-- **Bot 1**: Marketing Strategist
-  - Preset: "You are a marketing strategist. Develop a comprehensive marketing strategy."
-- **Bot 2**: Content Creator
-  - Preset: "You are a content creator. Create engaging content that aligns with the marketing strategy. When asked to continue, provide content ideas and execution plans."
-
-### Health and Wellness
-
-- **Bot 1**: Nutritionist
-  - Preset: "You are a nutritionist. Provide advice on balanced diets and healthy eating habits."
-- **Bot 2**: Fitness Coach
-  - Preset: "You are a fitness coach. Suggest workout routines and fitness tips. When asked to continue, provide detailed workout plans and fitness guidance."
-
-### Product Development
-
-- **Bot 1**: Product Manager
-  - Preset: "You are a product manager. Outline the product development process."
-- **Bot 2**: Product Designer
-  - Preset: "You are a product designer. Create design concepts and prototypes. When asked to continue, provide detailed design ideas and improvements."
-
-### Event Planning
-
-- **Bot 1**: Event Planner
-  - Preset: "You are an event planner. Plan the event details and logistics."
-- **Bot 2**: Event Coordinator
-  - Preset: "You are an event coordinator. Coordinate the event activities and schedule. When asked to continue, provide detailed coordination plans and schedules."
+- The application will attempt to load this key on startup. If it can't find the file or if the key is missing, it will prompt you to enter the API key manually.
 
 ## Contributing
+Contributions are welcome! Here's how you can help:
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or new features.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Commit your changes with meaningful commit messages.
+4. Push your branch and open a pull request.
+
+For significant changes, please open an issue first to discuss what you would like to change.
 
 ## License
+Distributed under the [MIT License](LICENSE.txt). See `LICENSE` for more information.
 
-This project is licensed under the MIT License.
+---
