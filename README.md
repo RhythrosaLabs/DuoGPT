@@ -1,7 +1,7 @@
 
 # DuoGPTeam
 
-ChatGPT Convo App is a versatile application that integrates OpenAI's GPT models and DALL-E for enhanced conversations, automated content creation, and graphic design. This app is designed to facilitate various team-based and solo tasks, leveraging AI capabilities to assist in development, marketing, business strategy, and more.
+A versatile application that integrates OpenAI's GPT models and DALL-E for enhanced conversations, automated content creation, and graphic design. This app is designed to facilitate various team-based and solo tasks, leveraging AI capabilities to assist in development, marketing, business strategy, and more.
 
 ## Features
 
