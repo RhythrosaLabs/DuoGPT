@@ -86,8 +86,5 @@ A versatile application that integrates OpenAI's GPT models and DALL-E for enhan
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
-## Contact
-For questions or support, please contact `your.email@example.com`.
 
-Enjoy using the ChatGPT Convo App!
 ```
