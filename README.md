@@ -76,15 +76,4 @@ A versatile application that integrates OpenAI's GPT models and DALL-E for enhan
 - **API Key Management**: The application will prompt for the API key on the first run. The key will be saved securely for future sessions.
 - **Right-Click Menu**: Right-click on the conversation box to access options for copying, cutting, pasting, and analyzing text.
 
-## Contributing
-1. Fork the repository.
-2. Create a new branch for your feature (`git checkout -b feature/AmazingFeature`).
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
-4. Push to the branch (`git push origin feature/AmazingFeature`).
-5. Open a Pull Request.
-
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for more information.
-
-
 ```
