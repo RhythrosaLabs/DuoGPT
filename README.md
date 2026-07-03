@@ -77,3 +77,8 @@ A versatile application that integrates OpenAI's GPT models and DALL-E for enhan
 - **Right-Click Menu**: Right-click on the conversation box to access options for copying, cutting, pasting, and analyzing text.
 
 ```
+
+
+## Support
+
+If you find this useful, consider supporting via [PayPal](https://paypal.me/noodlebake)
