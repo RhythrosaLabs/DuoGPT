@@ -1,5 +1,5 @@
 
-# DuoGPTeam
+# DuoGPT
 
 A versatile application that integrates OpenAI's GPT models and DALL-E for enhanced conversations, automated content creation, and graphic design. This app is designed to facilitate various team-based and solo tasks, leveraging AI capabilities to assist in development, marketing, business strategy, and more.
 
@@ -35,18 +35,18 @@ A versatile application that integrates OpenAI's GPT models and DALL-E for enhan
 ### Installation
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/chatgpt-convo-app.git
-    cd chatgpt-convo-app
+    git clone https://github.com/RhythrosaLabs/DuoGPT.git
+    cd DuoGPT
     ```
 
 2. Install the required packages:
     ```bash
-    pip install -r requirements.txt
+    pip install openai requests pandas pillow fuzzywuzzy
     ```
 
 3. Run the application:
     ```bash
-    python chatgpt_convo_app.py
+    python DuoGPT6.py
     ```
 
 ### Usage
